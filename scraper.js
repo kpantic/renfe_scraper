@@ -23,27 +23,37 @@ async function checkIfTicketsAvailable() {
   const originSelector = "#IdOrigen";
   const destinationSelector = "#IdDestino";
   const dateSelector = "#__fechaIdaVisual";
+  const dateReturnSelector = "#__fechaVueltaVisual";
   const submitButtonSelector = "#datosBusqueda > button";
   const stringNoResults = "El trayecto consultado no se encuentra disponible";
 
   // Set Origin
   await page.click(originSelector);
-  await page.keyboard.type("Sevilla");
+  await page.keyboard.type("Barcelona");
   await page.waitFor(500);
   page.keyboard.press("Enter");
 
   // Set Destination
   await page.click(destinationSelector);
-  await page.keyboard.type("Barcelona");
+  await page.keyboard.type("Sevilla");
   await page.waitFor(500);
   page.keyboard.press("Enter");
 
-  // Set date
+  // Set Departure date
   let searchInput = await page.$(dateSelector);
 
   await searchInput.click({ clickCount: 3 });
   await searchInput.press("Backspace");
-  await page.keyboard.type("02/03/2020");
+  await page.keyboard.type("27/03/2020");
+  await page.waitFor(500);
+  page.keyboard.press("Enter");
+
+  // Set Return date
+  searchInput = await page.$(dateReturnSelector);
+
+  await searchInput.click({ clickCount: 3 });
+  await searchInput.press("Backspace");
+  await page.keyboard.type("29/03/2020");
   await page.waitFor(500);
   page.keyboard.press("Enter");
 
